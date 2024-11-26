@@ -4,7 +4,7 @@
 GREETING="Welcome TO Shell Scripting!!!!"
 NAME="SIVARAMAKRISHNA"
 
-if [[ -z $GREETING && $NAME]]; then
+if [[ -z $GREETING && $NAME ]]; then
     echo "echo string is empty"
 elif [[ -n $GREETING && $NAME ]]; then
     echo "String is not empty"
