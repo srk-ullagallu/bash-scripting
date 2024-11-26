@@ -80,3 +80,66 @@ Provide a default value using `${}` syntax:
 echo "Your name is ${NAME:-Guest}" # Uses "Guest" if NAME is unset
 ```
 
+This is a common set of configurations used in shell scripts to enforce stricter error handling and improve script robustness. Let’s break it down:
+
+---
+
+### **1. `set -euo pipefail`:**
+
+#### `set -e`
+- **Purpose:** Exit the script immediately if any command exits with a non-zero status.
+- **Benefit:** Prevents the script from continuing in an unexpected or erroneous state.
+
+#### `set -u`
+- **Purpose:** Treat unset variables as errors and exit the script.
+- **Benefit:** Helps catch typos or missing variables that could cause issues in the script.
+
+#### `set -o pipefail`
+- **Purpose:** Makes the script exit if any command in a pipeline fails (not just the last one).
+- **Example:**
+  ```bash
+  set -o pipefail
+  false | true  # This pipeline will cause the script to exit, because `false` fails.
+  ```
+
+---
+
+### **2. `IFS=$'\n\t'`:**
+
+#### IFS (Internal Field Separator)
+- **Purpose:** Sets the field separator used for word splitting.
+- The default `IFS` includes spaces, tabs, and newlines (`IFS=" \t\n"`). 
+- By setting it to only `\n` (newline) and `\t` (tab), it:
+  - Prevents splitting on spaces.
+  - Makes the script handle inputs with spaces more safely.
+
+#### **Benefit:**
+- Helps avoid unintended word splitting issues, especially when processing filenames or text containing spaces.
+
+---
+
+### **Putting It Together**
+When combined, these configurations:
+
+1. Ensure the script exits on errors or undefined variables.
+2. Make pipelines fail if any step in the pipeline fails.
+3. Safeguard against issues with word splitting by restricting `IFS`.
+
+### **Example Script**
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Variables
+files=$(ls -1) # List files in the current directory
+
+# Loop through files
+for file in $files; do
+    echo "Processing file: $file"
+done
+```
+
+This script:
+- Exits if `ls` or `echo` fails.
+- Prevents issues with filenames containing spaces.
