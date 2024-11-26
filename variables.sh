@@ -12,3 +12,6 @@ fi
 
 # Use variables
 echo "$GREETING, Mr.$NAME!" # Output: Hello, World!
+
+echo "The present working dir is $(pwd)"
+echo "The present working dir is `pwd`"
