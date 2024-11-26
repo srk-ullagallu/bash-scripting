@@ -143,3 +143,79 @@ done
 This script:
 - Exits if `ls` or `echo` fails.
 - Prevents issues with filenames containing spaces.
+
+If you **remove `IFS=$'\n\t'`** from the script, the behavior of the `for` loop might change depending on the contents of the `files` variable. Here's what would happen:
+
+---
+
+### **Default `IFS` Behavior**
+- By default, the `IFS` (Internal Field Separator) includes:
+  ```
+  IFS=" \t\n"
+  ```
+  - Space (` `)
+  - Tab (`\t`)
+  - Newline (`\n`)
+
+When `IFS` is not explicitly set to `$'\n\t'`, the script will split the contents of `files` using **spaces, tabs, and newlines**.
+
+---
+
+### **Impact on the Script**
+
+1. **When filenames contain spaces:**
+   - If any filenames in the current directory have spaces (e.g., `file name.txt`), the `for` loop will incorrectly split them into multiple parts.
+   - Example:
+     - With `ls -1`, `files` might look like this:
+       ```
+       file1
+       file name.txt
+       file3
+       ```
+     - Without `IFS=$'\n\t'`, the loop splits `files` by spaces, processing `file`, `name.txt`, and `file3` separately.
+
+2. **When filenames do not contain spaces:**
+   - If all filenames are single words (e.g., `file1`, `file2`, `file3`), the script will work as expected even without setting `IFS`.
+
+---
+
+### **Example Comparison**
+
+#### With `IFS=$'\n\t'`:
+```bash
+# Assuming these files: file1, file name.txt, file3
+IFS=$'\n\t'
+files=$(ls -1)
+
+for file in $files; do
+    echo "Processing file: $file"
+done
+```
+**Output:**
+```
+Processing file: file1
+Processing file: file name.txt
+Processing file: file3
+```
+
+#### Without `IFS=$'\n\t'`:
+```bash
+# Assuming these files: file1, file name.txt, file3
+files=$(ls -1)
+
+for file in $files; do
+    echo "Processing file: $file"
+done
+```
+**Output:**
+```
+Processing file: file1
+Processing file: file
+Processing file: name.txt
+Processing file: file3
+```
+
+---
+
+### **Conclusion**
+If filenames contain spaces, removing `IFS=$'\n\t'` can cause the script to break or behave incorrectly because the loop will split filenames at spaces. To ensure the script works reliably with filenames containing spaces, always set `IFS` appropriately or use safer alternatives like `find` or `ls -1Q` (quoted output).
