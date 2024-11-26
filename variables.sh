@@ -1,7 +1,7 @@
 #!/bin/bash
 
-set -euo pipefail
-IFS=$'\n\t'
+# set -euo pipefail
+# IFS=$'\n\t'
 
 GREETING="Welcome TO Shell Scripting!!!!"
 NAME="SIVARAMAKRISHNA"
