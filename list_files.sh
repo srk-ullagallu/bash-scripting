@@ -3,8 +3,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-FILES=(ls -l)
+FILES=$(ls -l)
 
 for file in $FILES;do
-    echo "The list of avialable files are $file"
+    echo "The list of avialable files: $file"
 done
