@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define variables
-GREETING="Hello"
-NAME="World"
+GREETING="Welcome TO Shell Scripting!!!!"
+NAME="SIVARAMAKRISHNA"
 
 # Use variables
-echo "$GREETING, $NAME!" # Output: Hello, World!
+echo "$GREETING, Mr.$NAME!" # Output: Hello, World!
