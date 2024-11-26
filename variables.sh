@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Define variables
+set -euo pipefail
+IFS=$'\n\t'
+
 GREETING="Welcome TO Shell Scripting!!!!"
 NAME="SIVARAMAKRISHNA"
 
@@ -10,7 +12,7 @@ elif [[ -n $GREETING && $NAME ]]; then
     echo "String is not empty"
 fi
 
-# Use variables
+
 echo "$GREETING, Mr.$NAME!" # Output: Hello, World!
 
 echo "The present working dir is $(pwd)"
