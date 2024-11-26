@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eo pipefail
+set -euo pipefail
 IFS=$'\n\t'
 
 #GREETING="Welcome TO Shell Scripting!!!!"
