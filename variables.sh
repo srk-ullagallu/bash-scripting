@@ -3,8 +3,10 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-#GREETING="Welcome TO Shell Scripting!!!!"
+GREETING="Welcome TO Shell Scripting!!!!"
 NAME="SIVARAMAKRISHNA"
+
+ld -a
 
 if [[ -z $GREETING && $NAME ]]; then
     echo "echo string is empty"
