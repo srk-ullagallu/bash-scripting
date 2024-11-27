@@ -14,3 +14,5 @@ echo "The name is ${NAME::-1}"
 echo "The name is ${NAME:(-1)}"
 
 echo "The name is ${NAME:(-2):1}"
+
+echo "The name is ${NAME:-Rama}"
