@@ -11,4 +11,4 @@ done
 
 while read -r line;do
     echo "$line"
-done < hello.txt
+done < example.sh
