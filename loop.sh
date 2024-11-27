@@ -12,3 +12,7 @@ done
 while read -r line;do
     echo "$line"
 done < example.sh
+
+for i in {5..50..5};do
+    echo "$i"
+done
