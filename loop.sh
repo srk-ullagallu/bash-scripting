@@ -7,3 +7,8 @@ done
 for i in {1..5};do
     echo "The number is $i"
 done
+
+
+while read -r line;do
+    echo "$line"
+done < hello.txt
